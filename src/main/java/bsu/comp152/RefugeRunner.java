@@ -1,4 +1,5 @@
 package bsu.comp152;
+import java.util.Scanner;
 
 /**
  * RefugeRunner -
@@ -8,15 +9,19 @@ package bsu.comp152;
  *
  * Starter code by: Laura K. Gross, laura.gross@bridgew.edu, 2/2023
  *
- * Completed by: [student name], [student email], [date of completion]
+ * Completed by: Andrew Janedy, ajanedy@student.bridgew.edu, [date of completion]
  */
 public class RefugeRunner {
+    Scanner keyboard;
+    private WildlifeRefuge refuge;
 
     public RefugeRunner() {
 
+        keyboard = new Scanner(System.in);
+        refuge = null;
     }
 
-    public void runRefuge(WildlifeRefuge wlr){
-
+    public void runRefuge(WildlifeRefuge wlr) {
+        // FIXME
     }
 }

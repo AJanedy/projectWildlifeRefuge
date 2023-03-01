@@ -11,40 +11,75 @@ import java.util.ArrayList;
  *  Starter code by: Laura K. Gross, laura.gross@bridgew.edu, 2/2023
  *
  *
- * Completed by: [student name], [student email], [date of completion]
+ * Completed by: Andrew Janedy, ajanedy@student.bridgew.edu, [date of completion]
  */
 public class Animal {
 
-    public Animal(String ty, ArrayList<String> inj, boolean stay){
+    private String type;
+    private boolean stayWhenHealthy;
+    private ArrayList<String> injuries;
+    private Rehabilitator assignedRehabilitator;
 
+    public Animal(String ty, ArrayList<String> inj, boolean stay) {
+
+        type = ty;
+        stayWhenHealthy = stay;
+        injuries = inj;
+        assignedRehabilitator = null;
     }
 
-    public String getType() {
-        return "";
+    public String getType () {
+
+        return this.type;
     }
 
-    public boolean shouldKeepWhenHealthy() {
-        return false;
+    public boolean shouldKeepWhenHealthy () {
+
+        return this.stayWhenHealthy;
     }
 
-    public ArrayList<String> getInjuries() {
-        return null;
+    public ArrayList<String> getInjuries () {
+
+        return this.injuries;
     }
 
-    public boolean shouldBeReleased() {
-        return false;
+    public boolean shouldBeReleased () {
+
+        return this.stayWhenHealthy;
     }
 
     @Override
-    public String toString() {
-        return "";
+    public String toString () {
+
+        String willStay = " and will be kept after treatment.";
+        String willNotStay = " and will be released after treatment;";
+        String returnStay = "";
+        if (stayWhenHealthy) {
+            returnStay = willStay;
+        }
+        else {
+            returnStay = willNotStay
+        }
+
+        return "This " + this.type + " will be treated by " + this.assignedRehabilitator + " for "
+                + this.injuries + returnStay;
     }
 
     public void setRehabilitator(Rehabilitator rehabilitator) {
+        try {
+            rehabilitator.acceptsAnimalType(this.type);
+            assignedRehabilitator = rehabilitator;
+        }
+        catch (IllegalArgumentException) {
 
+        }
     }
-
     public void healInjury(String injuryName) {
+        try {
+            this.injuries.remove(injuryName)
+        }
+        catch (IllegalArgumentException) {
 
+        }
     }
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * Starter code by: Laura K. Gross, laura.gross@bridgew.edu, 2/2023
  *
- * Completed by: [student name], [student email], [date of completion]
+ * Completed by: Andrew Janedy, ajanedy@student.bridgew.edu, [date of completion]
  */
 public class Main {
     public static void main(String[] args) {
