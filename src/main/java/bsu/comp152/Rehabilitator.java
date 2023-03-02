@@ -18,7 +18,7 @@ public class Rehabilitator {
     private int idNumber;
     private int maxAnimalInjuries;
     private ArrayList<String> acceptedAnimalTypes;
-    private ArrayList<String> currentAnimals;
+    private ArrayList<Animal> currentAnimals;
 
     public Rehabilitator(String nm, int id, int maxInjuries, ArrayList<String> acceptedTypes) {
 
@@ -61,7 +61,7 @@ public class Rehabilitator {
 
     public int getAnimalInjuryCapacity() {
 
-        private int currentInjuries = 0;
+        int currentInjuries = 0;
         //FIXME
         // create for loop to count injuries
         for (Animal i : currentAnimals) {

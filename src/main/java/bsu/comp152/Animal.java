@@ -58,7 +58,7 @@ public class Animal {
             returnStay = willStay;
         }
         else {
-            returnStay = willNotStay
+            returnStay = willNotStay;
         }
 
         return "This " + this.type + " will be treated by " + this.assignedRehabilitator + " for "
@@ -70,15 +70,15 @@ public class Animal {
             rehabilitator.acceptsAnimalType(this.type);
             assignedRehabilitator = rehabilitator;
         }
-        catch (IllegalArgumentException) {
+        catch (IllegalArgumentException IAE) {
 
         }
     }
     public void healInjury(String injuryName) {
         try {
-            this.injuries.remove(injuryName)
+            this.injuries.remove(injuryName);
         }
-        catch (IllegalArgumentException) {
+        catch (IllegalArgumentException IAE) {
 
         }
     }
