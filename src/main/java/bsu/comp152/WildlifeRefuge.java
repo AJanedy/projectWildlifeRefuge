@@ -63,6 +63,16 @@ public class WildlifeRefuge {
     }
 
     public ArrayList<Animal> getAnimals() {
+
+        ArrayList<Animal> animals = new ArrayList<Animal>();
+        for (Rehabilitator i : rehabilitators) {
+            System.out.println(i.getName());
+            for (Animal j : i.getCurrentAnimals()) {
+                System.out.println(j.getType());
+                // FIXME : Not accessing properly
+            }
+        }
+
         //FIXME
         // ~The getAnimals method should take no parameters.  It should return an ArrayList of all
         //  animals that all rehabilitators have. That is,
@@ -75,6 +85,7 @@ public class WildlifeRefuge {
     }
 
     public void hireRehabilitator(Rehabilitator newHire) {
+        rehabilitators.add(newHire);
         //FIXME
         // ~The hireRehabilitator method should take one parameter.
         // ~It should add the parameter to the instance variable rehabilitators.

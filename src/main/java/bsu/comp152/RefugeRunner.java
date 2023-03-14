@@ -3,6 +3,7 @@ import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 /**
  * RefugeRunner -
  * A class for Project 3, COMP 152
@@ -23,6 +24,7 @@ public class RefugeRunner {
     ArrayList<String> acceptedAnimalList = new ArrayList<String>();
     ArrayList<String> injuryList = new ArrayList<String>();
     boolean stayAfterInjury;
+    String answer = "";
 
     public RefugeRunner() {
 
@@ -31,9 +33,8 @@ public class RefugeRunner {
     }
 
     public void runRefuge(WildlifeRefuge wlr) {
-        // FIXME
 
-
+        refuge = wlr;
         while (selection != 7) {
 
             System.out.println();
@@ -60,8 +61,10 @@ public class RefugeRunner {
                     case2Helper();
                     break;
                 case 3:
+                    case3Helper();
                     break;
                 case 4:
+                    case4Helper();
                     break;
                 case 5:
                     break;
@@ -77,14 +80,25 @@ public class RefugeRunner {
     public void case1Helper() {
         System.out.println("Enter the name of the rehabilitator you would like to hire: ");
         newRehabilitatorName = keyboard.nextLine();
-        System.out.println("How many animals can " + newRehabilitatorName + " accommodate at one time?");
+
+        while (newRehabilitatorMaxPatients == 0) {
+            System.out.println("How many animals can " + newRehabilitatorName + " accommodate at one time?");
+            try {
+                //keyboard.next();
+                newRehabilitatorMaxPatients = keyboard.nextInt();
+                //keyboard.next();
+            } catch (Exception exception) {
+                System.out.println("Please enter a valid number");
+                keyboard.nextLine();
+            }
+        }
+
         newRehabilitatorMaxPatients = keyboard.nextInt();
         keyboard.nextLine();
         System.out.println("What animals does " + newRehabilitatorName + " accept?");
-
         int animalSelection = 0;
         while (animalSelection != 1) {
-//
+        // FIXME : clear buffer
             try {
                 animalSelection = keyboard.nextInt();
             }
@@ -95,10 +109,9 @@ public class RefugeRunner {
                 System.out.println("Enter another animal or press 1 when completed");
             }
         }
-        WildlifeRefuge newWildlifeRefuge = new WildlifeRefuge(20);
-        Rehabilitator rehabilitator = new Rehabilitator(newRehabilitatorName, newWildlifeRefuge.getNextRehabilitatorId(),
+        Rehabilitator rehabilitator = new Rehabilitator(newRehabilitatorName, refuge.getNextRehabilitatorId(),
                 newRehabilitatorMaxPatients, acceptedAnimalList);
-        newWildlifeRefuge.hireRehabilitator(rehabilitator);
+        refuge.hireRehabilitator(rehabilitator);
         System.out.println("You hired " + rehabilitator);
     }
 
@@ -122,14 +135,29 @@ public class RefugeRunner {
             }
         }
         System.out.println("Should the animal be kept after it is fully healed (press 'y' for yes and 'n' for no)?");
-        stayAfterInjuryTryCatch();
+        keyboard.nextLine();
+        answer = keyboard.nextLine();
+        stayAfterInjuryMethod();
+        Animal animal = new Animal(admittedAnimal, injuryList, stayAfterInjury);
+        System.out.println(animal);
+
+        // TODO : Add the animal to the rehabilitator who is qualified and has the most available
+        //  capacity. This will require checking every potential rehabilitator's availability.
 
     }
     public void case3Helper() {
+        int idNumberToCheck;
+        System.out.println("What is the ID number of the rehabilitator you would like to look up?");
+        idNumberToCheck = keyboard.nextInt();
+        if (refuge.getRehabilitatorById(idNumberToCheck) == null) {
+            System.out.println("The input is not valid");
+        }
 
+        // TODO : If the rehabilitator is null, print "The input is not valid."
+        //  Otherwise enter the rehabilitator menu. (See below.)
     }
     public void case4Helper() {
-
+        refuge.getAnimals();
     }
     public void case5Helper() {
 
@@ -137,18 +165,19 @@ public class RefugeRunner {
     public void case6Helper() {
 
     }
-    public void stayAfterInjuryTryCatch() {
-        try {
-            if (keyboard.nextLine().equalsIgnoreCase("y")) {
-                stayAfterInjury = true;
-            }
-            if (keyboard.nextLine().equalsIgnoreCase("n")) {
-                stayAfterInjury = false;
-            }
-        }
-        catch (Exception exception) {
-            stayAfterInjuryTryCatch();
-        }
+    public void stayAfterInjuryMethod() {
 
+        if (answer.equalsIgnoreCase("y")) {
+            stayAfterInjury = true;
+        }
+        else if (answer.equalsIgnoreCase("n")) {
+            stayAfterInjury = false;
+        }
+        else {
+            System.out.println("Please enter a valid input");
+            System.out.println("Should the animal be kept after it is fully healed (press 'y' for yes and 'n' for no)?");
+            answer = keyboard.nextLine();
+            stayAfterInjuryMethod();
+        }
     }
 }
